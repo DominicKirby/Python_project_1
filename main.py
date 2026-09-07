@@ -1,4 +1,3 @@
-
 application = True
 print("1: View available events, 2: Register attendees, 3: View attendee lists, 4: Search for an attendee, 5: Display event statistics, 6: Exit the application")
 
@@ -83,40 +82,13 @@ events_dict = {
     }
 }
 
-
-def view_attendee_lists(events_dict, names_dict):
-    if not events_dict:
-        print("No events available.")
-        return
-
-    print("\nEvents:")
-    for event_id, event in events_dict.items():
-        print(f"{event_id}. {event['event_name']}")
-
-    choice = input("\nEnter the event number to view attendees: ")
-
-    if not choice.isdigit() or int(choice) not in events_dict:
-        print("Invalid selection.")
-        return
-
-    event = events_dict[int(choice)]
-    attendee_ids = event["attendee_ids"]
-
-    print(f"\nAttendees for {event['event_name']}:")
-    if not attendee_ids:
-        print("No attendees registered yet.")
-        return
-
-    for attendee_id in attendee_ids:
-        name = names_dict.get(attendee_id, "Unknown attendee")
-        print(f"{attendee_id}. {name}")
-
-
 while application:
     """
     Application to perform 6 basic tasks based on a fictional dataset
     """
+    print("-" * 31)
     choice = input("Enter your choice: ")
+    print("-" * 31)
 
     if choice not in ["1", "2", "3", "4", "5", "6"]:
         print("Please enter a valid choice from 1-6")
@@ -127,7 +99,7 @@ while application:
         """
         Printing all available events with current and maximum attten
         """
-        print("\nAll available events")
+        print("All available events")
 
         print("\nThe events offered are:")
         for event in events_dict:
@@ -135,19 +107,82 @@ while application:
                 print(f'  - {events_dict[event]["event_name"]} with {events_dict[event]["max_attendees"] - len(events_dict[event]["attendee_ids"])} slots free.')
             if events_dict[event]["max_attendees"] == len(events_dict[event]["attendee_ids"]):
                 print(f'  - {events_dict[event]["event_name"]} with no spaces available')
-        print("")
+
 
     if choice == 2:
-        print(choice)
+        def register_attendee(events_dict, names_dict):
+            """
+            Registering any attendees for any event
+            """
+            for event_id in events_dict:
+                event = events_dict[event_id]
+                print(event_id, ":", event["event_name"])
+            # This prints every event
+
+            chosen_event_id = int(input("Enter the event ID to register for: "))
+            event = events_dict[chosen_event_id]
+            # This asks the potential attendee to pick an event and assigns that to chosen_event_ID
+
+            if len(event["attendee_ids"]) >= event["max_attendees"]:
+                print("Sorry, that event is full.")
+                return
+            # This makes sure the event isn't full
+
+            attendee_id = int(input("Enter attendee ID: "))
+            # Ask the user to input their ID
+
+            if attendee_id not in names_dict:
+                print("Sorry, this ID doesn't exist")
+                return
+            # Make sure the ID exists
+
+            event["attendee_ids"].append(attendee_id)
+            print(f"{names_dict[attendee_id]} is now registered for {event['event_name']}.")
+            # Append them to the event list
+
+        register_attendee(events_dict, names_dict)
+
     if choice == 3:
+        def view_attendee_lists(events_dict, names_dict):
+            """
+            View any attendees for given events
+            """
+            if not events_dict:
+                print("No events available.")
+                return
+
+            print("Events:")
+            for event_id, event in events_dict.items():
+                print(f"{event_id}. {event['event_name']}")
+
+            choice = input("\nEnter the event number to view attendees: ")
+
+            if not choice.isdigit() or int(choice) not in events_dict:
+                print("Invalid selection.")
+                return
+
+            event = events_dict[int(choice)]
+            attendee_ids = event["attendee_ids"]
+
+            print(f"\nAttendees for {event['event_name']}:")
+            if not attendee_ids:
+                print("No attendees registered yet.")
+                return
+
+            for attendee_id in attendee_ids:
+                name = names_dict.get(attendee_id, "Unknown attendee")
+                print(f"{attendee_id}. {name}")
+
         view_attendee_lists(events_dict, names_dict)
+
+
 
     if choice == 4:
         """
         Finding individuals from the dataset and handling possible error inputs
         """
         search_name = input(
-            "\nEnter the attendee's name: "
+            "Enter the attendee's name: "
         ).strip().lower()
 
         attendee_found = False
@@ -171,7 +206,7 @@ while application:
         """
         Statistics on all the events attendance rate and maximum attendance possible
         """
-        print("\nEvent statistics")
+        print("Event statistics")
         print(f"\nAmount of customers: {len(names_dict)}")
         print(f"Attendees per event: ")
         for event in events_dict.values():
@@ -184,9 +219,10 @@ while application:
             # noinspection bad-argument-type
             attendance_sum += len(event["attendee_ids"])
             max_attendance_sum += event["max_attendees"]
-        print(f"Attendance over all events is {attendance_sum} out of {max_attendance_sum} maximum.\n")
+        print(f"Attendance over all events is {attendance_sum} out of {max_attendance_sum} maximum.")
 
     if choice == 6:
         print("Application closed")
+        print("-" * 31)
         application = False
 
