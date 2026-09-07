@@ -18,36 +18,6 @@ This function allows the user to register themselves into an event ...
 
 
 ## View attendee lists
-
-
-## Search for an attendee
-Search for an Attendee
-
-The attendee search feature allows the user to search for a registered attendee by entering their name.
-
-When option 4 is selected, the program:
-
-Asks the user to enter an attendee’s name.
-Converts the search text to lowercase and removes unnecessary spaces.
-Searches through the names_dict dictionary.
-Checks which events contain the attendee’s ID.
-Displays the attendee’s name and registered event.
-Displays Attendee not found if there are no matches.
-
-The search is not case-sensitive. It also accepts partial names. For example, entering alice, Alice, or Ali can find Alice Smith.
-
-An attendee may be registered for more than one event. If this happens, the program displays each event containing that attendee
-
-## View available events
-
-...
-
-## Register Attendee function
-
-This function allows the user to register themselves into an event ...
-
-
-## View attendee lists
 Lets a user select an event and see who's registered for it.
 
 **How it works:**
@@ -86,7 +56,25 @@ Attendees for yoga:
 **Edge cases handled:**
 - Invalid/non-existent event number → `Invalid selection.`
 - Event exists but has zero attendees → `No attendees registered yet.`
+
+
 ## Search for an attendee
+Search for an Attendee
+
+The attendee search feature allows the user to search for a registered attendee by entering their name.
+
+When option 4 is selected, the program:
+
+Asks the user to enter an attendee’s name.
+Converts the search text to lowercase and removes unnecessary spaces.
+Searches through the names_dict dictionary.
+Checks which events contain the attendee’s ID.
+Displays the attendee’s name and registered event.
+Displays Attendee not found if there are no matches.
+
+The search is not case-sensitive. It also accepts partial names. For example, entering alice, Alice, or Ali can find Alice Smith.
+
+An attendee may be registered for more than one event. If this happens, the program displays each event containing that attendee
 
 
 ## Display event statistics
@@ -95,3 +83,5 @@ When you select option 5, you get delivered 5 rows of information on the followi
 attendance per event compared to the maximum, and total attendance across the events out of the maximum space, called from the
 names_dict dictionary dictating the event and attendance rates.
 
+
+...
