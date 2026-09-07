@@ -1,7 +1,5 @@
 
-
 application = True
-
 print("1: View available events, 2: Register attendees, 3: View attendee lists, 4: Search for an attendee, 5: Display event statistics, 6: Exit the application")
 
 names_dict = {
@@ -85,6 +83,35 @@ events_dict = {
     }
 }
 
+
+def view_attendee_lists(events_dict, names_dict):
+    if not events_dict:
+        print("No events available.")
+        return
+
+    print("\nEvents:")
+    for event_id, event in events_dict.items():
+        print(f"{event_id}. {event['event_name']}")
+
+    choice = input("\nEnter the event number to view attendees: ")
+
+    if not choice.isdigit() or int(choice) not in events_dict:
+        print("Invalid selection.")
+        return
+
+    event = events_dict[int(choice)]
+    attendee_ids = event["attendee_ids"]
+
+    print(f"\nAttendees for {event['event_name']}:")
+    if not attendee_ids:
+        print("No attendees registered yet.")
+        return
+
+    for attendee_id in attendee_ids:
+        name = names_dict.get(attendee_id, "Unknown attendee")
+        print(f"{attendee_id}. {name}")
+
+
 while application:
     """
     Application to perform 6 basic tasks based on a fictional dataset
@@ -112,9 +139,8 @@ while application:
 
     if choice == 2:
         print(choice)
-
     if choice == 3:
-        print(choice)
+        view_attendee_lists(events_dict, names_dict)
 
     if choice == 4:
         """
