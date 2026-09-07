@@ -20,11 +20,41 @@ An attendee may be registered for more than one event. If this happens, the prog
 
 ...
 
-## Register attendee
+## Register Attendee 
 
-This function allows the user to register themselves into an event by entering the event they want to join and their User ID. It runs when the user selected option 2.
+This function allows the user to register themselves into an event by selecting it from a list and providing their details, adding them to that event's attendee list.
 
-The function asks for the user to enter the event they want to register for then it asks for their user ID. If the event is full, It'll let you know and ask for another choice and if the user ID is invalid, it will let you know.
+**How it works:**
+- Displays every event in `events_dict` with its ID and name.
+- Prompts the user to enter an event number.
+- Validates the input and rejects non-numeric input and event numbers that don't exist, printing `Invalid selection.` instead of crashing.
+- Prompts the user to enter their name.
+- Generates a new unique attendee ID, adds the name to `names_dict`, and appends the new ID to the selected event's `attendee_ids` list.
+- Prints a confirmation message showing the attendee's name and the event they've registered for.
+
+**Function:**
+```python
+register_attendee(events_dict, names_dict)
+```
+Takes the shared events and names dictionaries as arguments, updates them in place, and prints a confirmation message.
+
+**Example usage:**
+```
+Enter your choice: 1
+Events:
+1. python workshop
+2. 5 a side football
+3. Basketball
+4. yoga
+5. Charity fundraiser
+Enter the event number to register for: 4
+Enter your name: Fiona Gallagher
+You have successfully registered Fiona Gallagher for yoga.
+```
+
+**Edge cases handled:**
+- Invalid/non-existent event number → `Invalid selection.`
+- Empty name entered → prompts the user to re-enter a valid name.
 
 
 ## View attendee lists
