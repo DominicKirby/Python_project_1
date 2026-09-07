@@ -1,3 +1,4 @@
+
 application = True
 print("1: View available events, 2: Register attendees, 3: View attendee lists, 4: Search for an attendee, 5: Display event statistics, 6: Exit the application")
 
@@ -112,17 +113,80 @@ def view_attendee_lists(events_dict, names_dict):
 
 
 while application:
-    choice = int(input("Enter your choice: "))
+    """
+    Application to perform 6 basic tasks based on a fictional dataset
+    """
+    choice = input("Enter your choice: ")
+
+    if choice not in ["1", "2", "3", "4", "5", "6"]:
+        print("Please enter a valid choice from 1-6")
+    else:
+        choice = int(choice)
+
     if choice == 1:
-        print(choice)
+        """
+        Printing all available events with current and maximum attten
+        """
+        print("\nAll available events")
+
+        print("\nThe events offered are:")
+        for event in events_dict:
+            if events_dict[event]["max_attendees"] != len(events_dict[event]["attendee_ids"]):
+                print(f'  - {events_dict[event]["event_name"]} with {events_dict[event]["max_attendees"] - len(events_dict[event]["attendee_ids"])} slots free.')
+            if events_dict[event]["max_attendees"] == len(events_dict[event]["attendee_ids"]):
+                print(f'  - {events_dict[event]["event_name"]} with no spaces available')
+        print("")
+
     if choice == 2:
         print(choice)
     if choice == 3:
         view_attendee_lists(events_dict, names_dict)
+
     if choice == 4:
-        print(choice)
+        """
+        Finding individuals from the dataset and handling possible error inputs
+        """
+        search_name = input(
+            "\nEnter the attendee's name: "
+        ).strip().lower()
+
+        attendee_found = False
+
+        for attendee_id, attendee_name in names_dict.items():
+            if search_name in attendee_name.lower():
+
+                for event in events_dict.values():
+                    if attendee_id in event["attendee_ids"]:
+                        print("\nAttendee found!")
+                        print("Name:", attendee_name)
+                        print("Event:", event["event_name"].title())
+                        attendee_found = True
+
+        if attendee_found == False:
+            print("Attendee not found.")
+
+        print("")
+
     if choice == 5:
-        print(choice)
+        """
+        Statistics on all the events attendance rate and maximum attendance possible
+        """
+        print("\nEvent statistics")
+        print(f"\nAmount of customers: {len(names_dict)}")
+        print(f"Attendees per event: ")
+        for event in events_dict.values():
+            print(f'  - {event["event_name"]} : {len(event["attendee_ids"])} out of {event["max_attendees"]} maximum.')
+
+        attendance_sum = 0
+        max_attendance_sum = 0
+
+        for event in events_dict.values():
+            # noinspection bad-argument-type
+            attendance_sum += len(event["attendee_ids"])
+            max_attendance_sum += event["max_attendees"]
+        print(f"Attendance over all events is {attendance_sum} out of {max_attendance_sum} maximum.\n")
+
     if choice == 6:
-        print(choice)
+        print("Application closed")
         application = False
+
