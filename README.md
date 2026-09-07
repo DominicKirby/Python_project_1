@@ -5,6 +5,8 @@ events, on a fictional dataset in Python, there is 6 options to choose from when
 1 - viewing available events, 2 - register attendees, 3 - view attendee list, 4 - search for an attendee, 5 - general event
 statistics, 6 - exit application. All created from a fictional dataset in the form of a Python dictionary. 
 
+
+
 ## View available events
 
 When you give a choice of one, you receive the title for each of the events available as well as the current attendees and maximum
@@ -12,9 +14,47 @@ amount of attendees for each event.
 
 Created by calling upon the created dictionary names_dict of event title and attendee amount, and delivered in a basic understandable format.
 
-## Register Attendee function
 
-This function allows the user to register themselves into an event ...
+
+
+## Register Attendee 
+
+This function allows the user to register themselves into an event by selecting it from a list and providing their details, adding them to that event's attendee list.
+
+**How it works:**
+- Displays every event in `events_dict` with its ID and name.
+- Prompts the user to enter an event number.
+- Validates the input and rejects non-numeric input and event numbers that don't exist, printing `Invalid selection.` instead of crashing.
+- Prompts the user to enter their name.
+- Generates a new unique attendee ID, adds the name to `names_dict`, and appends the new ID to the selected event's `attendee_ids` list.
+- Prints a confirmation message showing the attendee's name and the event they've registered for.
+
+**Function:**
+```python
+register_attendee(events_dict, names_dict)
+```
+Takes the shared events and names dictionaries as arguments, updates them in place, and prints a confirmation message.
+
+**Example usage:**
+```
+Enter your choice: 1
+Events:
+1. python workshop
+2. 5 a side football
+3. Basketball
+4. yoga
+5. Charity fundraiser
+Enter the event number to register for: 4
+Enter your name: Fiona Gallagher
+You have successfully registered Fiona Gallagher for yoga.
+```
+
+**Edge cases handled:**
+- Invalid/non-existent event number → `Invalid selection.`
+- Empty name entered → prompts the user to re-enter a valid name.
+
+
+
 
 
 ## View attendee lists
@@ -58,6 +98,9 @@ Attendees for yoga:
 - Event exists but has zero attendees → `No attendees registered yet.`
 
 
+
+
+
 ## Search for an attendee
 Search for an Attendee
 
@@ -75,6 +118,9 @@ Displays Attendee not found if there are no matches.
 The search is not case-sensitive. It also accepts partial names. For example, entering alice, Alice, or Ali can find Alice Smith.
 
 An attendee may be registered for more than one event. If this happens, the program displays each event containing that attendee
+
+
+
 
 
 ## Display event statistics
