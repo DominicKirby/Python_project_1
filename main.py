@@ -1,3 +1,3 @@
-## View_available_event
+## View_available_events
 
 print("hello world")
