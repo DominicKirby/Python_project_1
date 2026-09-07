@@ -1,4 +1,5 @@
 
+
 application = True
 
 print("1: View available events, 2: Register attendees, 3: View attendee lists, 4: Search for an attendee, 5: Display event statistics, 6: Exit the application")
@@ -95,6 +96,7 @@ while application:
                 print(f'  - {events_dict[event]["event_name"]} with no spaces available')
         print("\n")
 
+
     if choice == 2:
         print(choice)
 
@@ -102,7 +104,24 @@ while application:
         print(choice)
 
     if choice == 4:
-        print(choice)
+        search_name = input(
+            "Enter the attendee's name: "
+        ).strip().lower()
+
+        attendee_found = False
+
+        for attendee_id, attendee_name in names_dict.items():
+            if search_name in attendee_name.lower():
+
+                for event in events_dict.values():
+                    if attendee_id in event["attendee_ids"]:
+                        print("\nAttendee found!")
+                        print("Name:", attendee_name)
+                        print("Event:", event["event_name"].title())
+                        attendee_found = True
+
+        if attendee_found == False:
+            print("Attendee not found.")
 
     if choice == 5:
         print(choice)
@@ -110,3 +129,4 @@ while application:
     if choice == 6:
         print(choice)
         application = False
+
