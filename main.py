@@ -87,7 +87,13 @@ events_dict = {
 while application:
     choice = int(input("Enter your choice: "))
     if choice == 1:
-        print(choice)
+        print("\n The available events are:")
+        for event in events_dict:
+            if events_dict[event]["max_attendees"] != len(events_dict[event]["attendee_ids"]):
+                print(f'  - {events_dict[event]["event_name"]} with {events_dict[event]["max_attendees"] - len(events_dict[event]["attendee_ids"])} slots free.')
+            if events_dict[event]["max_attendees"] == len(events_dict[event]["attendee_ids"]):
+                print(f'  - {events_dict[event]["event_name"]} with no spaces available')
+        print("\n")
 
     if choice == 2:
         print(choice)
