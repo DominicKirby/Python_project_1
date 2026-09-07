@@ -15,3 +15,22 @@ Displays Attendee not found if there are no matches.
 The search is not case-sensitive. It also accepts partial names. For example, entering alice, Alice, or Ali can find Alice Smith.
 
 An attendee may be registered for more than one event. If this happens, the program displays each event containing that attendee
+
+## View available events
+
+...
+
+## Register Attendee function
+
+This function allows the user to register themselves into an event ...
+
+
+## View attendee lists
+
+
+## Search for an attendee
+
+
+## Display event statistics
+
+
